@@ -47,11 +47,27 @@ public class Tetris extends JPanel {
                     {new Point(1, 2), new Point(1, 1), new Point(1, 0), new Point(2, 1)},
 
             },
+            {
+                    // Z
+                    {new Point(0, 0), new Point(0, 1), new Point(1, 1), new Point(1, 2)},
+                    {new Point(0, 1), new Point(1, 1), new Point(1, 0), new Point(2, 0)},
+                    {new Point(0, 0), new Point(0, 1), new Point(1, 1), new Point(1, 2)},
+                    {new Point(0, 1), new Point(1, 1), new Point(1, 0), new Point(2, 0)},
+
+            },
+            {
+                    // Z
+                    {new Point(0, 2), new Point(0, 1), new Point(1, 1), new Point(1, 0)},
+                    {new Point(0, 0), new Point(1, 0), new Point(1, 1), new Point(2, 1)},
+                    {new Point(0, 2), new Point(0, 1), new Point(1, 1), new Point(1, 0)},
+                    {new Point(0, 0), new Point(1, 0), new Point(1, 1), new Point(2, 1)},
+
+            },
 
     };
 
     private final Color[] myColor = {Color.CYAN, Color.MAGENTA, Color.ORANGE, Color.YELLOW,
-                                    Color.BLUE, Color.PINK, Color.RED};
+                                    Color.BLUE, Color.GREEN, Color.RED};
 
     private Point pt;
     private int currentPiece;
@@ -81,7 +97,7 @@ public class Tetris extends JPanel {
         pt = new Point(5, 1);
         rotation = 0;
         if (nextPiece.isEmpty()) {
-            Collections.addAll(nextPiece, 0, 1, 2, 3, 4);
+            Collections.addAll(nextPiece, 0, 1, 2, 3, 4, 5, 6);
         }
         Collections.shuffle(nextPiece);
         currentPiece = nextPiece.get(0);
@@ -90,6 +106,11 @@ public class Tetris extends JPanel {
     private boolean collidesAt(int x, int y, int rotation) {
         for (Point p : myPoint[currentPiece][rotation]) {
             if (well[p.x+x][p.y+y+1] != Color.BLACK) {
+                try {
+                    Thread.sleep(2000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
                 return true;
             }
         }
